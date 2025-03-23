@@ -1,0 +1,17 @@
+# virtual environments
+venv/
+faceenv/
+
+# node_modules
+node_modules/
+
+# log files
+*.log
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
