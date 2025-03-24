@@ -1,26 +1,26 @@
 import { Link } from 'react-router-dom';
 
 const Home = () => (
-  <div className="min-h-[80vh]">
+  <div className="min-h-[50vh]">
     {/* Hero Section */}
     <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-5xl font-bold mb-6">Welcome to AI Attendance System</h1>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
-          Streamline your attendance management with AI-powered facial recognition.
-          Ensure accurate, fast, and secure attendance tracking for your organization.
+        <p className="text-xl mb-8 max-w-xl mx-auto">
+          MNNIT's officail attendance marking web app
+          Mark your presence with a click of the button
         </p>
         <Link
           to="/camera"
           className="px-8 py-4 bg-white text-blue-600 rounded-lg shadow-lg hover:bg-blue-50 transition-all duration-300 text-lg font-semibold"
         >
-          Start Taking Attendance
+          Mark Your Attendance
         </Link>
       </div>
     </div>
 
     {/* Features Section */}
-    <div className="container mx-auto px-4 py-16">
+    {/* <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
       <div className="grid md:grid-cols-3 gap-8">
         <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
@@ -39,7 +39,7 @@ const Home = () => (
           <p className="text-gray-600">Built with security in mind, ensuring your attendance data is protected.</p>
         </div>
       </div>
-    </div>
+    </div> */}
 
     {/* CTA Section */}
     
