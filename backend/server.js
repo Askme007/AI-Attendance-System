@@ -3,7 +3,6 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -23,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5000000 }, // 5MB limit
+    limits: { fileSize: 5000000 }, 
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -36,21 +35,12 @@ const upload = multer({
     }
 });
 
-// Upload endpoint
+// Upload code for cameraFeed to images folder
 app.post('/api/uploads', upload.single('image'), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded' });
         }
-
-        // Save image info to MongoDB
-        const imageDoc = new Image({
-            filename: req.file.filename,
-            path: req.file.path,
-            size: req.file.size
-        });
-
-        await imageDoc.save();
 
         res.status(200).json({
             message: 'Image uploaded successfully',
