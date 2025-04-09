@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const CameraFeed = () => {
   const [isCameraOn, setIsCameraOn] = useState(false);
@@ -9,6 +10,7 @@ const CameraFeed = () => {
   const canvasRef = useRef(null);
   const [isSending, setIsSending] = useState(false);
   const frameCounter = useRef(1); // Persist counter across renders
+  const { user, isAuthenticated } = useAuth0();
 
   const startCamera = async () => {
     try {
@@ -55,7 +57,7 @@ const CameraFeed = () => {
         canvas.toBlob(resolve, 'image/jpeg', 1);
       });
 
-      const frameName = `frame${frameCounter.current}.jpg`; // Dynamic filename
+      const frameName = isAuthenticated ? `${user.name}${frameCounter.current}.jpg` : `unknown${frameCounter.current}.jpg`
       frameCounter.current += 1; // Increment counter
 
       const formData = new FormData();
