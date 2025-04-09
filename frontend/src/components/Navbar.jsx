@@ -20,8 +20,8 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {isAuthenticated && user && (
               <div className="flex items-center space-x-2">
-                <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full" />
-                <span className="text-sm font-medium text-gray-700">Welcome, {user.name}!</span>
+                <img src={user.picture} alt={user.nickname} className="w-8 h-8 rounded-full" />
+                <span className="text-sm font-medium text-gray-700">Welcome, {user.nickname}!</span>
               </div>
             )}
             {isAuthenticated ? (
