@@ -17,32 +17,7 @@ const Home = () => (
           Mark Your Attendance
         </Link>
       </div>
-    </div>
-
-    {/* Features Section */}
-    {/* <div className="container mx-auto px-4 py-16">
-      <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <div className="text-blue-600 text-4xl mb-4">🎯</div>
-          <h3 className="text-xl font-semibold mb-2">Accurate Recognition</h3>
-          <p className="text-gray-600">Advanced AI algorithms ensure precise facial recognition and attendance tracking.</p>
-        </div>
-        <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <div className="text-blue-600 text-4xl mb-4">⚡</div>
-          <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
-          <p className="text-gray-600">Process attendance in seconds, saving valuable time for both staff and students.</p>
-        </div>
-        <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <div className="text-blue-600 text-4xl mb-4">🔒</div>
-          <h3 className="text-xl font-semibold mb-2">Secure & Reliable</h3>
-          <p className="text-gray-600">Built with security in mind, ensuring your attendance data is protected.</p>
-        </div>
-      </div>
-    </div> */}
-
-    {/* CTA Section */}
-    
+    </div> 
   </div>
 );
 

@@ -4,6 +4,7 @@ import About from './components/About';
 import Navbar from './components/Navbar';
 import CameraFeed from './components/Camerafeed';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => (
   <Router>
@@ -12,8 +13,10 @@ const App = () => (
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/camera" element={<CameraFeed />} />
           <Route path="/about" element={<About />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/camera" element={<CameraFeed />} />
+          </Route>
         </Routes>
       </main>
       <Footer />
