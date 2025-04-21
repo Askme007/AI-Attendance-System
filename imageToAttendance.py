@@ -1,8 +1,7 @@
 import cv2
 import face_recognition
-import os
-import glob
 import numpy as np
+from attendance_tracker import mark_attendance
 from simple_facerec import SimpleFacerec
 
 # Initialize SimpleFacerec
@@ -10,8 +9,8 @@ sfr = SimpleFacerec()
 sfr.load_encoding_images("images/")  # Folder where your known face images are stored
 
 # Load the image to be recognized
-image = face_recognition.load_image_file("group.png")  # Replace with your image path
-image_cv = cv2.imread("group.png")  # For OpenCV to display
+image = face_recognition.load_image_file("path")  # Replace with your image path
+image_cv = cv2.imread("path")  # For OpenCV to display
 
 # Get face locations from the image
 face_locations = face_recognition.face_locations(image)
@@ -37,22 +36,25 @@ for face_encoding in face_encodings:
 
     face_names.append(name)
 
+    mark_attendance(name)
+
 # Draw rectangles and names around the faces
-for (top, right, bottom, left), name in zip(face_locations, face_names):
-    cv2.rectangle(image_cv, (left, top), (right, bottom), (0, 255, 0), 2)  # Green rectangle
+# for (top, right, bottom, left), name in zip(face_locations, face_names):
+#     cv2.rectangle(image_cv, (left, top), (right, bottom), (0, 255, 0), 2)  # Green rectangle
     
-    # Reduce font size by changing the scale to a smaller value
-    font_scale = 0.6  # Smaller font size
-    font_thickness = 1
-    cv2.putText(image_cv, name, (left, top - 10), cv2.FONT_HERSHEY_DUPLEX, font_scale, (0, 0, 255), font_thickness)  # Red text
+#     # Reduce font size by changing the scale to a smaller value
+#     font_scale = 0.6  # Smaller font size
+#     font_thickness = 1
+#     cv2.putText(image_cv, name, (left, top - 10), cv2.FONT_HERSHEY_DUPLEX, font_scale, (0, 0, 255), font_thickness)  # Red text
 
-# Create a resizable window
-cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)  # This makes the window resizable
-cv2.resizeWindow("Face Recognition", 800, 600)  # Initial size, user can resize after opening the window
+# print(face_names)
+# # Create a resizable window
+# cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)  # This makes the window resizable
+# cv2.resizeWindow("Face Recognition", 800, 600)  # Initial size, user can resize after opening the window
 
-# Show the image with recognized faces and names
-cv2.imshow("Face Recognition", image_cv)
+# # Show the image with recognized faces and names
+# cv2.imshow("Face Recognition", image_cv)
 
-# Wait for user to press a key
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# # Wait for user to press a key
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
