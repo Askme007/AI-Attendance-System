@@ -1,60 +1,52 @@
 import cv2
 import face_recognition
 import numpy as np
+import pickle
 from attendance_tracker import mark_attendance
-from simple_facerec import SimpleFacerec
+import sys
+import os
 
-# Initialize SimpleFacerec
-sfr = SimpleFacerec()
-sfr.load_encoding_images("images/")  # Folder where your known face images are stored
+ENCODINGS_FILE = "/home/adi/Programming/AI-Attendance-System/encodings.pickle"
 
-# Load the image to be recognized
-image = face_recognition.load_image_file("path")  # Replace with your image path
-image_cv = cv2.imread("path")  # For OpenCV to display
+if len(sys.argv) < 2:
+    print("No image given")
+    sys.exit(1)
 
-# Get face locations from the image
+# Load the saved encodings
+if not os.path.exists(ENCODINGS_FILE):
+    print(f"Encodings file '{ENCODINGS_FILE}' not found. Run 'encode_faces.py' first.")
+    sys.exit(1)
+
+with open(ENCODINGS_FILE, "rb") as f:
+    data = pickle.load(f)
+    known_face_encodings = data["encodings"]
+    known_face_names = data["names"]
+
+# Load and process uploaded image
+img_path = sys.argv[1]
+image = face_recognition.load_image_file(img_path)
+image_cv = cv2.imread(img_path)
+
 face_locations = face_recognition.face_locations(image)
-print(f"Found {len(face_locations)} face(s) in this image.")
-
-# Get face encodings for each detected face
 face_encodings = face_recognition.face_encodings(image, face_locations)
 
-# Prepare to recognize the faces
-face_names = []
+if len(face_encodings) == 0:
+    print("No faces found in the uploaded image.")
+    sys.exit(0)
 
-# Loop through the face encodings and match them with the known faces
 for face_encoding in face_encodings:
-    matches = face_recognition.compare_faces(sfr.known_face_encodings, face_encoding)
+    if not known_face_encodings:
+        print("No known face encodings loaded.")
+        continue
+
+    matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+    face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
+
+    best_match_index = np.argmin(face_distances)
     name = "Unknown"
 
-    # Use the face with the smallest distance as the best match
-    face_distances = face_recognition.face_distance(sfr.known_face_encodings, face_encoding)
-    best_match_index = np.argmin(face_distances)
-
     if matches[best_match_index]:
-        name = sfr.known_face_names[best_match_index]
+        name = known_face_names[best_match_index]
 
-    face_names.append(name)
-
+    print(f"Recognized: {name}")
     mark_attendance(name)
-
-# Draw rectangles and names around the faces
-# for (top, right, bottom, left), name in zip(face_locations, face_names):
-#     cv2.rectangle(image_cv, (left, top), (right, bottom), (0, 255, 0), 2)  # Green rectangle
-    
-#     # Reduce font size by changing the scale to a smaller value
-#     font_scale = 0.6  # Smaller font size
-#     font_thickness = 1
-#     cv2.putText(image_cv, name, (left, top - 10), cv2.FONT_HERSHEY_DUPLEX, font_scale, (0, 0, 255), font_thickness)  # Red text
-
-# print(face_names)
-# # Create a resizable window
-# cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)  # This makes the window resizable
-# cv2.resizeWindow("Face Recognition", 800, 600)  # Initial size, user can resize after opening the window
-
-# # Show the image with recognized faces and names
-# cv2.imshow("Face Recognition", image_cv)
-
-# # Wait for user to press a key
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
