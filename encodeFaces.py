@@ -1,4 +1,3 @@
-# encode_faces.py
 import os
 import face_recognition
 import pickle
