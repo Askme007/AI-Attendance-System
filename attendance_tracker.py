@@ -24,6 +24,3 @@ def mark_attendance(name):
         print(f"Attendance marked for {name}")
     else:
         print(f"{name} already marked present")
-
-if __name__ == "__main__":
-    mark_attendance("Test User")

@@ -17,7 +17,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/home" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/" className="text-gray-300 hover:text-white transition-colors">
                   Home
                 </a>
               </li>
