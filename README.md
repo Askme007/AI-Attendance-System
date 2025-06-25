@@ -13,9 +13,9 @@ The AI Attendance System is a Python-based application designed to manage attend
 
 ## Contributors
 
-- [Abhishek Jha](https://github.com/abhishekcodes16)
 - [Aditya Shukla](https://github.com/Aditya-Shukla05)
 - [Ashkrit Rai](https://github.com/Askme007)
+- [Abhishek Jha](https://github.com/abhishekcodes16)
 - [Abhishek Kumar](https://github.com/Akabhi2311)
 - [Aayush Kumar](https://github.com/Akcodet7)
   
